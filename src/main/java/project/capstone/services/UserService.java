@@ -3,6 +3,7 @@ package project.capstone.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.capstone.DAO.UserDAO;
+import project.capstone.dto.AddUserRequest;
 import project.capstone.entities.User;
 
 import java.util.List;
@@ -23,7 +24,13 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
-    public User addUser(User user) {
+    public User addUser(AddUserRequest dto) {
+        User user = new User();
+        user.setRole(dto.getRole());
+        user.setName(dto.getName());
+        user.setSurname(dto.getSurname());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
         return userDAO.save(user);
     }
 
