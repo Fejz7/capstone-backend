@@ -45,4 +45,12 @@ public class UserService {
     public void deleteUser(int id) {
         userDAO.deleteById(id);
     }
+
+    public User findByEmailAndPassword(String email, String password) {
+        Optional<User> optionalUser = userDAO.findByEmail(email);
+        if (optionalUser.isPresent() && optionalUser.get().getPassword().equals(password)) {
+            return optionalUser.get();
+        }
+        return null;
+    }
 }
